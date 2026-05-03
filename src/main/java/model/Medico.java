@@ -9,4 +9,9 @@ public class Medico {
     public ArrayList viewagenda(){}
     public void registeroperation(String idr){}
     public void completeoperation(String idp, String text){}
+
+    public Medico(String m, String s){
+        matricola=m;
+        specializzazione=s;
+    }
 }

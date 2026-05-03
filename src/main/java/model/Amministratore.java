@@ -34,6 +34,19 @@ public class Amministratore extends Utente {
             }
         }
     }
+
+    public ArrayList<Ricovero> getPazientiInScadenza(LocalDate date, ArrayList<Ricovero> listr){
+        ArrayList<Ricovero> nlistr= new ArrayList<Ricovero>();
+        for(int i=0;i<listr.size();i++){
+            if(listr.get(i).getEnd()==date)
+                nlistr.add(listr.get(i));
+        }
+        return nlistr;
+    }
+
+    public ArrayList<Letto> cercaLettiDisponibili(String idrep){
+
+    }
     public Amministratore(String usn, String pw){
         super(usn, pw);
     }
