@@ -11,8 +11,8 @@ public class Ricovero {
     private String idrec;
 
     public void calculatetime(){
-        int d=ChronoUnit.DAYS.between(end,start);
-        System.out.println("Il ricovero durera" d + "giorni.");
+        long d=ChronoUnit.DAYS.between(end,start);
+        System.out.println("Il ricovero durera"+ d + "giorni.");
     }
 
     public LocalDate getStart(){
@@ -36,12 +36,12 @@ public class Ricovero {
     }
 
     public boolean isoverlapped(Ricovero compared, String bedcode){
+        boolean overlapstate=false;
         if(bedcode==codiceb) {
             if(start.isAfter(compared.getStart())&&start.isBefore(compared.getEnd()))
-                return true;
-            else
-                return false;
+                overlapstate=true;
         }
+        return overlapstate;
     }
 
     public Ricovero(LocalDate s, LocalDate e, String cb, String cp, String idr){
