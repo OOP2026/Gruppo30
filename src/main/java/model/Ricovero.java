@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public class Ricovero {
     private LocalDate start;
@@ -9,6 +10,10 @@ public class Ricovero {
     private String codicep;
     private String codiceb;
     private String idrec;
+    private ArrayList<Prestazione> prestazioniassegnate=null;
+    Letto lettoassegnato;
+    // Non ho trovato necessario implementare l'associazione tra paziente e ricovero, in quanto sarebbe inutile ai fini del programma.
+
 
     public void calculatetime(){
         long d=ChronoUnit.DAYS.between(end,start);
@@ -35,6 +40,10 @@ public class Ricovero {
         end=newe;
     }
 
+    public ArrayList<Prestazione> getPrestazioniassegnate(){
+        return prestazioniassegnate;
+    }
+
     public boolean isoverlapped(Ricovero compared, String bedcode){
         boolean overlapstate=false;
         if(bedcode==codiceb) {
@@ -44,11 +53,12 @@ public class Ricovero {
         return overlapstate;
     }
 
-    public Ricovero(LocalDate s, LocalDate e, String cb, String cp, String idr){
+    public Ricovero(LocalDate s, LocalDate e, String cb, String cp, String idr, Letto l){
         start=s;
         end=e;
         codiceb=cb;
         codicep=cp;
         idrec=idr;
+        lettoassegnato=l;
     }
 }

@@ -1,12 +1,14 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Paziente {
     private String codiceFiscale;
     private String nome;
     private String cognome;
     private LocalDate dataNascita;
+    // Non ho trovato necessario implementare l'associazione tra paziente e ricovero, in quanto sarebbe inutile ai fini del programma.
 
     public String getCodiceFiscale() {
         return codiceFiscale;

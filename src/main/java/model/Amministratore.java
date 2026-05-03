@@ -21,9 +21,12 @@ public class Amministratore extends Utente {
         }
     }
 
-    public void inserisciRicovero(LocalDate s, LocalDate e, String cb, String cp, String idr, ArrayList<Ricovero> listr){
-        Ricovero ricovery=new Ricovero(s, e, cb, cp, idr);
-        listr.add(ricovery);
+//Questo metodo inizializza un ricovero e lo assegna ad un letto.
+
+    public void inserisciRicovero(LocalDate s, LocalDate e, String cb, String cp, String idr, Letto l){
+        Ricovero ricovery=new Ricovero(s, e, cb, cp, idr, l);
+        l.getRicoveriAssegnati().add(ricovery);
+
     }
 
     public void modificaRicovero(String idr, LocalDate ns, LocalDate ne, ArrayList<Ricovero> listr){
@@ -44,8 +47,14 @@ public class Amministratore extends Utente {
         return nlistr;
     }
 
-    public ArrayList<Letto> cercaLettiDisponibili(String idrep){
-
+    public ArrayList<Letto> cercaLettiDisponibili(ArrayList<Stanza> lists){
+        ArrayList<Letto> listl=new ArrayList<Letto>();
+        LocalDate d1=LocalDate.of(2026,5,2);
+        LocalDate d2=LocalDate.of(2026,5,2);
+        for(int i=0; i<lists.size();i++){
+            listl.addAll(lists.get(i).listaDisponibili(d1,d2));
+        }
+        return listl;
     }
     public Amministratore(String usn, String pw){
         super(usn, pw);

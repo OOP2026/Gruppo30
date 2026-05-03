@@ -9,9 +9,45 @@ enum StatoPrestazione{
 public class Prestazione {
     private String tipo;
     private LocalDate data;
-    private String esito;
+    private String esito=null;
     private StatoPrestazione stato;
     private String descrizione;
+    private String idwork;
+    Ricovero ricoveroassegnato;
+    Medico medicoassegnato;
+    TurnoLavorativo turno;
 
-    public boolean convalidateshift(){}
+
+    public LocalDate getData(){
+        return data;
+    }
+
+    public String getIdwork(){
+        return idwork;
+    }
+
+    public void setEsito(String s){
+        esito=s;
+    }
+
+    public boolean convalidateshift(){
+        boolean validturn=false;
+
+        if(this.turno.getData()==this.data)
+            validturn=true;
+        else
+            System.out.println("Turno non valido, assegnare un turno diverso a questa prestazione o cambia la data della prestazione.");
+
+        return validturn;
+    }
+
+    public Prestazione(String t, LocalDate d, StatoPrestazione s, String de, Ricovero r, Medico m, TurnoLavorativo tl){
+        tipo=t;
+        data=d;
+        stato=s;
+        descrizione=de;
+        ricoveroassegnato=r;
+        medicoassegnato=m;
+        turno=tl;
+    }
 }

@@ -1,17 +1,45 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Medico {
     private String matricola;
     private String specializzazione;
+    private ArrayList<Prestazione> prestazioni=null;
+    Reparto r;
+    ArrayList<TurnoLavorativo> turniassegnati=null;
 
-    public ArrayList viewagenda(){}
-    public void registeroperation(String idr){}
-    public void completeoperation(String idp, String text){}
 
-    public Medico(String m, String s){
+
+    public ArrayList viewagenda(LocalDate date){
+        ArrayList<Prestazione> listp=new ArrayList<Prestazione>();
+
+        for(int i=0; i>prestazioni.size();i++){
+            if(prestazioni.get(i).getData()==date)
+                listp.add(prestazioni.get(i));
+        }
+        return listp;
+    }
+    public void registeroperation(String t, LocalDate d, StatoPrestazione s, String de, Ricovero r, TurnoLavorativo tl){
+        Prestazione work=new Prestazione(t, d, s, de, r, this, tl);
+        r.getPrestazioniassegnate().add(work);
+        this.prestazioni.add(work);
+    }
+    public void completeoperation(String idp, String text){
+        for(int i=0; i<prestazioni.size();i++){
+            if(idp==prestazioni.get(i).getIdwork())
+                prestazioni.get(i).setEsito(text);
+        }
+    }
+
+    public ArrayList<Prestazione> getPrestazioni(){
+        return prestazioni;
+    }
+
+    public Medico(String m, String s, Reparto r){
         matricola=m;
         specializzazione=s;
+        this.r=r;
     }
 }
