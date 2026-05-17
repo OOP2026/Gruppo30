@@ -25,8 +25,8 @@ public class Stanza {
     }
 
     public ArrayList<Letto> listaDisponibili(LocalDate d1, LocalDate d2){
-        ArrayList<Letto> newlist= new ArrayList<Letto>();
-        for(int i=0;i>letti.size();i++){
+        ArrayList<Letto> newlist= new ArrayList<>();
+        for(int i=0;i<letti.size();i++){
             if(letti.get(i).isAvailable(d1,d2))
                 newlist.add(letti.get(i));
         }

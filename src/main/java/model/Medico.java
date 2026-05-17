@@ -12,16 +12,16 @@ public class Medico {
 
 
 
-    public ArrayList viewagenda(LocalDate date){
-        ArrayList<Prestazione> listp=new ArrayList<Prestazione>();
+    public ArrayList<Prestazione> viewagenda(LocalDate date){
+        ArrayList<Prestazione> listp=new ArrayList<>();
 
-        for(int i=0; i>prestazioni.size();i++){
+        for(int i=0; i<prestazioni.size();i++){
             if(prestazioni.get(i).getData()==date)
                 listp.add(prestazioni.get(i));
         }
         return listp;
     }
-    public void registeroperation(String t, LocalDate d, StatoPrestazione s, String de, Ricovero r, TurnoLavorativo tl){
+    public void registeroperation(String t, LocalDate d, String s, String de, Ricovero r, TurnoLavorativo tl){
         Prestazione work=new Prestazione(t, d, s, de, r, this, tl);
         r.getPrestazioniassegnate().add(work);
         this.prestazioni.add(work);

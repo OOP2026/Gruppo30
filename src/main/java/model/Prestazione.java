@@ -1,16 +1,12 @@
 package model;
 
 import java.time.LocalDate;
-enum StatoPrestazione{
-    Programmata,
-    Eseguita,
-    Annullata
-}
+
 public class Prestazione {
     private String tipo;
     private LocalDate data;
     private String esito=null;
-    private StatoPrestazione stato;
+    private String stato;
     private String descrizione;
     private String idwork;
     Ricovero ricoveroassegnato;
@@ -41,7 +37,7 @@ public class Prestazione {
         return validturn;
     }
 
-    public Prestazione(String t, LocalDate d, StatoPrestazione s, String de, Ricovero r, Medico m, TurnoLavorativo tl){
+    public Prestazione(String t, LocalDate d, String s, String de, Ricovero r, Medico m, TurnoLavorativo tl){
         tipo=t;
         data=d;
         stato=s;

@@ -46,10 +46,9 @@ public class Ricovero {
 
     public boolean isoverlapped(Ricovero compared, String bedcode){
         boolean overlapstate=false;
-        if(bedcode==codiceb) {
-            if(start.isAfter(compared.getStart())&&start.isBefore(compared.getEnd()))
+        if(bedcode.equals(codiceb)&&start.isAfter(compared.getStart())&&start.isBefore(compared.getEnd()))
                 overlapstate=true;
-        }
+
         return overlapstate;
     }
 

@@ -20,7 +20,7 @@ public class Letto {
         for(int i=0; i<ricoveriAssegnati.size();i++){
             if(d1.isBefore(ricoveriAssegnati.get(i).getStart()) && d2.isBefore(ricoveriAssegnati.get(i).getStart())) {
                 if (d1.isAfter(ricoveriAssegnati.get(i).getEnd()) && d2.isAfter(ricoveriAssegnati.get(i).getEnd())){
-
+                    //Codice vuoto in quanto non necessario eseguire operazioni in caso la condizione e' vera.
                 }
                 else {
                     availability = false;

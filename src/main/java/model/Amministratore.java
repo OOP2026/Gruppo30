@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 
 public class Amministratore extends Utente {
-    public void inserisciPaziente(String c, String n, String s, LocalDate d, ArrayList list){
+    public void inserisciPaziente(String c, String n, String s, LocalDate d, ArrayList<Paziente> list){
         Paziente patient=new Paziente(c, n, s, d);
         list.add(patient);
     }
@@ -39,7 +39,7 @@ public class Amministratore extends Utente {
     }
 
     public ArrayList<Ricovero> getPazientiInScadenza(LocalDate date, ArrayList<Ricovero> listr){
-        ArrayList<Ricovero> nlistr= new ArrayList<Ricovero>();
+        ArrayList<Ricovero> nlistr= new ArrayList<>();
         for(int i=0;i<listr.size();i++){
             if(listr.get(i).getEnd()==date)
                 nlistr.add(listr.get(i));
@@ -48,7 +48,7 @@ public class Amministratore extends Utente {
     }
 
     public ArrayList<Letto> cercaLettiDisponibili(ArrayList<Stanza> lists){
-        ArrayList<Letto> listl=new ArrayList<Letto>();
+        ArrayList<Letto> listl=new ArrayList<>();
         LocalDate d1=LocalDate.of(2026,5,2);
         LocalDate d2=LocalDate.of(2026,5,2);
         for(int i=0; i<lists.size();i++){
