@@ -16,7 +16,7 @@ public class SchermataAmministratore {
 
     public SchermataAmministratore(JFrame frameC, Controller controller) {
         frame= new JFrame("Area Amministratore");
-        frame.setContentPane(PanelAdmin);
+        frame.setContentPane(getPanelAdmin());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(frameC);
@@ -26,7 +26,7 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Gestione Pazienti");
-                GestionePazienti gestionepazienti=new GestionePazienti(frame, controller);
+                GestionePazienti gestionePazienti=new GestionePazienti(frame, controller);
                 frame.setVisible(false);
             }
         });
@@ -35,7 +35,8 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Gestione Ricoveri");
-                //controller
+                GestioneRicoveri gestioneRicoveri= new GestioneRicoveri(frame, controller);
+                frame.setVisible(false);
             }
         });
 
@@ -43,7 +44,9 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Ricerca Dimissioni");
-                //controller
+                RicercaDimissioni ricercaDimissioni= new RicercaDimissioni(frame, controller);
+                frame.setVisible(false);
+
             }
         });
 
@@ -51,7 +54,8 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Stato Letti");
-                //controller
+                StatoLetti statoLetti= new StatoLetti(frame, controller);
+                frame.setVisible(false);
             }
         });
     }

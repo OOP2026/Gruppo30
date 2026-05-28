@@ -1,8 +1,13 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+import controller.Controller;
 
 public class RicercaDimissioni {
     private JPanel panelDimissioni;
@@ -11,29 +16,50 @@ public class RicercaDimissioni {
     private JButton btnIndietro;
     private JTextField textField1;
     private JLabel campoDataRicerca;
+    private JFrame frame;
 
-    public RicercaDimissioni() {
+    public RicercaDimissioni(JFrame framec, Controller controller) {
+        frame= new JFrame("Ricerca Dimissioni");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(getPanelDimissioni());
+        frame.pack();
+        frame.setLocationRelativeTo(framec);
+        frame.setVisible(true);
+
+
         btnCercaDimissioni.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                DefaultTableModel modeltabella= (DefaultTableModel) tabellaDimissioni.getModel();
+                ArrayList lista = controller.viewPazientiInDimissione(getDataRicerca());
+                for (int i = 0; i < lista.size(); i++) {
+                    modeltabella.addRow(new Object[]{lista.get(i)});
+                }
             }
         });
 
         btnIndietro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                framec.setVisible(true);
+                frame.dispose();
             }
         });
+
+        tabellaDimissioni.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Paziente"}){});
+        DefaultTableModel modeltabella= (DefaultTableModel) tabellaDimissioni.getModel();
+        ArrayList lista = controller.viewPazientiInDimissione(getDataRicerca());
+        for (int i=0; i<lista.size(); i++){
+            modeltabella.addRow(new Object[]{lista.get(i)});
+        }
     }
 
     public JPanel getPanelDimissioni() {
         return panelDimissioni;
     }
 
-    public String getDataRicerca() {
-        return textField1.getText();
+    public LocalDate getDataRicerca() {
+        return LocalDate.parse(textField1.getText());
     }
 
     public JTable getTabellaDimissioni() {

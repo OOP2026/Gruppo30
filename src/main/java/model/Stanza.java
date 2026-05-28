@@ -7,12 +7,13 @@ public class Stanza {
     private int numero;
     private int maxletti;
     Reparto r;
-    private ArrayList<Letto> letti=null;
+    private ArrayList<Letto> letti;
 
     public Stanza(int n, int ml, Reparto r){
         numero=n;
         maxletti=ml;
         this.r=r;
+        letti=new ArrayList<>();
     }
 
     public void addLetto(String c){
@@ -22,6 +23,10 @@ public class Stanza {
 
     public ArrayList<Letto> getLetti(){
         return letti;
+    }
+
+    public int getNumero(){
+        return numero;
     }
 
     public ArrayList<Letto> listaDisponibili(LocalDate d1, LocalDate d2){

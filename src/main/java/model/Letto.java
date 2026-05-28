@@ -11,9 +11,12 @@ public class Letto {
     public Letto(String c, Stanza s){
         code=c;
         this.s=s;
+        ricoveriAssegnati=new ArrayList<>();
     }
 
-
+    public String getCode(){
+        return code;
+    }
 
     public boolean isAvailable(LocalDate d1, LocalDate d2){
         boolean availability=true;
@@ -31,6 +34,15 @@ public class Letto {
                 availability=false;
                 break;
             }
+        }
+        return availability;
+    }
+    public boolean isAvailableToday() {
+        LocalDate d=LocalDate.now();
+        boolean availability = true;
+        for (int i = 0; i < ricoveriAssegnati.size(); i++) {
+            if (d.isAfter(ricoveriAssegnati.get(i).getStart()) && d.isBefore(ricoveriAssegnati.get(i).getEnd()))
+                availability = false;
         }
         return availability;
     }

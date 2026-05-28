@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import controller.Controller;
+import java.time.LocalDate;
 
 public class GestionePazienti {
     private JPanel panelPazienti;
@@ -19,11 +20,12 @@ public class GestionePazienti {
     private JLabel campoCF;
     private JLabel campoData;
     private JLabel gestionePazienti;
+    private JButton ritornaButton;
     private JFrame frame;
 
     public GestionePazienti(JFrame framec, Controller controller) {
         frame = new JFrame("Gestione Pazienti");
-        frame.setContentPane(panelPazienti);
+        frame.setContentPane(getPanelPazienti());
         frame.setLocationRelativeTo(framec);
         frame.pack();
         frame.setVisible(true);
@@ -31,14 +33,22 @@ public class GestionePazienti {
         confermaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                controller.aggiungiPaziente(getNome(),getCognome(),getCodiceFiscale(),getDataNascita());
             }
         });
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                svuotaCampi();
+            }
+        });
+
+        ritornaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                framec.setVisible(true);
+                frame.dispose();
             }
         });
     }
@@ -50,7 +60,7 @@ public class GestionePazienti {
     public String getNome() { return textField1.getText(); }
     public String getCognome() { return textField2.getText(); }
     public String getCodiceFiscale() { return textField3.getText(); }
-    public String getDataNascita() { return textField4.getText(); }
+    public LocalDate getDataNascita() { return LocalDate.parse(textField4.getText()); }
 
     public void svuotaCampi() {
         textField1.setText("");

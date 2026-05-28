@@ -3,6 +3,9 @@ package gui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+
+import controller.Controller;
 
 public class GestioneRicoveri {
     private JPanel panelRicoveri;
@@ -13,19 +16,37 @@ public class GestioneRicoveri {
     private JButton annullaButton;
     private JButton confermaButton;
     private JTable tabellaRicoveri;
+    private JButton tornaButton;
+    private JFrame frame;
 
-    public GestioneRicoveri() {
+    public GestioneRicoveri(JFrame framec, Controller controller) {
+        frame=new JFrame("Gestione Ricoveri");
+        frame.setVisible(true);
+        frame.setContentPane(getPanelRicoveri());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(framec);
+
+
         confermaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                controller.aggiungiRicovero(getDataInizio(), getDataFine(), getCodiceLetto(), getCFPaziente());
             }
         });
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                svuotaCampi();
+            }
+        });
+
+        tornaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                framec.setVisible(true);
+                frame.dispose();
             }
         });
     }
@@ -35,8 +56,8 @@ public class GestioneRicoveri {
     }
     public String getCFPaziente() { return campoCFPaziente.getText(); }
     public String getCodiceLetto() { return campoCodiceLetto.getText(); }
-    public String getDataInizio() { return campoDataInizio.getText(); }
-    public String getDataFine() { return campoDataFine.getText(); }
+    public LocalDate getDataInizio() { return LocalDate.parse(campoDataInizio.getText()); }
+    public LocalDate getDataFine() { return LocalDate.parse(campoDataFine.getText()); }
 
     public JTable getTabellaRicoveri() { return tabellaRicoveri; }
 
