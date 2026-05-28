@@ -1,5 +1,7 @@
 package gui;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,19 +13,28 @@ public class ModificaEsito {
     private JTextArea areaPrestazioni;
     private JButton salvaButton;
     private JButton annullaButton;
+    private JFrame frame;
 
-    public ModificaEsito() {
+    public ModificaEsito(JFrame framec, Controller controller) {
+        frame= new JFrame("Modifica Esito");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(framec);
+        frame.pack();
+        frame.setContentPane(getPanelModificaEsito());
+        frame.setVisible(true);
+
         salvaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                controller.completaPrestazione(getPrestazioni(), getEsito());
             }
         });
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Controller
+                framec.setVisible(true);
+                frame.dispose();
             }
         });
     }

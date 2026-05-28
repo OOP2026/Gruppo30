@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Medico extends Utente{
@@ -20,12 +21,12 @@ public class Medico extends Utente{
         }
         return listp;
     }
-    public void registeroperation(String t, LocalDate d, String s, String de, Ricovero r, TurnoLavorativo tl){
-        Prestazione work=new Prestazione(t, d, s, de, r, this, tl);
+    public void registraPrestazione(String t, LocalDate d, String de, Ricovero r, TurnoLavorativo tl){
+        Prestazione work=new Prestazione(t, d, de, r, this, tl);
         r.getPrestazioniassegnate().add(work);
         this.prestazioni.add(work);
     }
-    public void completeoperation(String idp, String text){
+    public void completaPrestazione(String idp, String text){
         for(int i=0; i<prestazioni.size();i++){
             if(idp==prestazioni.get(i).getIdwork())
                 prestazioni.get(i).setEsito(text);
@@ -36,6 +37,14 @@ public class Medico extends Utente{
         return prestazioni;
     }
 
+    public ArrayList<TurnoLavorativo> getTurni(){
+        return turniassegnati;
+    }
+
+    public void aggiungiTurno(LocalDate date, LocalTime i, LocalTime f){
+        TurnoLavorativo turno=new TurnoLavorativo(date, i, f, this);
+        turniassegnati.add(turno);
+    }
 
     public Medico(String usn, String pw, String m, String s, Reparto r){
         super(usn,pw);

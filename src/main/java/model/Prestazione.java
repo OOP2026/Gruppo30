@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Prestazione {
     private String tipo;
     private LocalDate data;
-    private String esito=null;
+    private String esito;
     private String stato;
     private String descrizione;
     private String idwork;
@@ -37,10 +37,11 @@ public class Prestazione {
         return validturn;
     }
 
-    public Prestazione(String t, LocalDate d, String s, String de, Ricovero r, Medico m, TurnoLavorativo tl){
+    public Prestazione(String t, LocalDate d, String de, Ricovero r, Medico m, TurnoLavorativo tl){
         tipo=t;
         data=d;
-        stato=s;
+        stato="Non completato";
+        esito="Sconosciuto";
         descrizione=de;
         ricoveroassegnato=r;
         medicoassegnato=m;

@@ -47,11 +47,6 @@ public class RicercaDimissioni {
         });
 
         tabellaDimissioni.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"Paziente"}){});
-        DefaultTableModel modeltabella= (DefaultTableModel) tabellaDimissioni.getModel();
-        ArrayList lista = controller.viewPazientiInDimissione(getDataRicerca());
-        for (int i=0; i<lista.size(); i++){
-            modeltabella.addRow(new Object[]{lista.get(i)});
-        }
     }
 
     public JPanel getPanelDimissioni() {
