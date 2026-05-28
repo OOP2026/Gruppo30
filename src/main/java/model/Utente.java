@@ -6,7 +6,7 @@ public class Utente {
     protected String username;
     protected String password;
 
-
+    
     public boolean login(String usn, String pw){
         return(usn==username&&pw==password);
     }

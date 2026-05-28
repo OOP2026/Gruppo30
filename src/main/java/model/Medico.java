@@ -3,13 +3,12 @@ package model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Medico {
+public class Medico extends Utente{
     private String matricola;
     private String specializzazione;
-    private ArrayList<Prestazione> prestazioni=null;
+    private ArrayList<Prestazione> prestazioni;
     Reparto r;
-    ArrayList<TurnoLavorativo> turniassegnati=null;
-
+    ArrayList<TurnoLavorativo> turniassegnati;
 
 
     public ArrayList<Prestazione> viewagenda(LocalDate date){
@@ -37,9 +36,13 @@ public class Medico {
         return prestazioni;
     }
 
-    public Medico(String m, String s, Reparto r){
+
+    public Medico(String usn, String pw, String m, String s, Reparto r){
+        super(usn,pw);
         matricola=m;
         specializzazione=s;
         this.r=r;
+        prestazioni=new ArrayList<Prestazione>();
+        turniassegnati=new ArrayList<TurnoLavorativo>();
     }
 }
