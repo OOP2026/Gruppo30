@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import controller.Controller;
 
 public class SchermataAmministratore {
     private JButton gestionePazientiButton;
@@ -10,13 +11,23 @@ public class SchermataAmministratore {
     private JButton ricercaDimissioniButton;
     private JButton statoLettiButton;
     private JPanel PanelAdmin;
+    JFrame frame;
 
-    public SchermataAmministratore() {
+
+    public SchermataAmministratore(JFrame frameC, Controller controller) {
+        frame= new JFrame("Area Amministratore");
+        frame.setContentPane(PanelAdmin);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(frameC);
+        frame.setVisible(true);
+
         gestionePazientiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Gestione Pazienti");
-                //controller
+                GestionePazienti gestionepazienti=new GestionePazienti(frame, controller);
+                frame.setVisible(false);
             }
         });
 

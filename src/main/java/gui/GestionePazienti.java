@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import controller.Controller;
 
 public class GestionePazienti {
     private JPanel panelPazienti;
@@ -18,8 +19,15 @@ public class GestionePazienti {
     private JLabel campoCF;
     private JLabel campoData;
     private JLabel gestionePazienti;
+    private JFrame frame;
 
-    public GestionePazienti() {
+    public GestionePazienti(JFrame framec, Controller controller) {
+        frame = new JFrame("Gestione Pazienti");
+        frame.setContentPane(panelPazienti);
+        frame.setLocationRelativeTo(framec);
+        frame.pack();
+        frame.setVisible(true);
+
         confermaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

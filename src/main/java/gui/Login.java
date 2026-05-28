@@ -1,5 +1,7 @@
 package gui;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +13,8 @@ public class Login {
     private JButton accediButton;
     private JLabel username;
     private JLabel password;
+    private static JFrame frame;
+    private final Controller controller=new Controller();
 
     private JCheckBox chkAdmin;
     private JCheckBox chkMedico;
@@ -21,6 +25,15 @@ public class Login {
             public void actionPerformed(ActionEvent e) {
                 String user = textField1.getText();
                 String pass = new String(passwordField1.getPassword());
+                if(isTestAdmin()){
+                    controller.login(user,pass,true);
+                    SchermataAmministratore schermataAmministratore=new SchermataAmministratore(frame, controller);
+                    frame.setVisible(false);
+                } else if (isTestMedico()) {
+                    controller.login(user,pass,false);
+                    AgendaMedico agendaMedico=new AgendaMedico(frame, controller);
+                    frame.setVisible(false);
+                }
 
                 //controller
                 //Se isTestAdmin() è true apri SchermataAmministratore.
@@ -34,7 +47,7 @@ public class Login {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Sistema Ospedaliero - Accesso");
+        frame = new JFrame("Sistema Ospedaliero - Accesso");
         frame.setContentPane(new Login().login);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(450, 300);
