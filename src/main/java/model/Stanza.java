@@ -2,18 +2,18 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Stanza {
     private int numero;
     private int maxletti;
     Reparto r;
-    private ArrayList<Letto> letti;
+    private ArrayList<Letto> letti=null;
 
     public Stanza(int n, int ml, Reparto r){
         numero=n;
         maxletti=ml;
         this.r=r;
-        letti=new ArrayList<>();
     }
 
     public void addLetto(String c){
@@ -21,15 +21,11 @@ public class Stanza {
         letti.add(newletto);
     }
 
-    public ArrayList<Letto> getLetti(){
+    public List<Letto> getLetti(){
         return letti;
     }
 
-    public int getNumero(){
-        return numero;
-    }
-
-    public ArrayList<Letto> listaDisponibili(LocalDate d1, LocalDate d2){
+    public List<Letto> listaDisponibili(LocalDate d1, LocalDate d2){
         ArrayList<Letto> newlist= new ArrayList<>();
         for(int i=0;i<letti.size();i++){
             if(letti.get(i).isAvailable(d1,d2))

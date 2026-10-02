@@ -15,18 +15,9 @@ public class TurnoLavorativo {
         return data;
     }
 
-    public LocalTime getInizio(){
-        return inizio;
-    }
-    public LocalTime getFine(){
-        return fine;
-    }
-
-    public TurnoLavorativo(LocalDate d, LocalTime i, LocalTime f, Medico m){
+    public TurnoLavorativo(LocalDate d, LocalTime i, LocalTime f){
         data=d;
         inizio=i;
         fine=f;
-        medicoditurno=m;
-        prestazioniditurno=new ArrayList<>();
     }
 }

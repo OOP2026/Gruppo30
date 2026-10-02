@@ -3,17 +3,27 @@ package model;
 import java.time.LocalDate;
 
 public class Prestazione {
-    private String tipo;
-    private LocalDate data;
+    private final String tipo;
+    private final LocalDate data;
     private String esito;
     private String stato;
     private String descrizione;
-    private String idwork;
+    private final String idwork;
     Ricovero ricoveroassegnato;
     Medico medicoassegnato;
     TurnoLavorativo turno;
 
+    public String getTipo() {
+        return tipo;
+    }
 
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String s){
+        stato=s;
+    }
     public LocalDate getData(){
         return data;
     }
@@ -24,6 +34,18 @@ public class Prestazione {
 
     public void setEsito(String s){
         esito=s;
+    }
+
+    public String getEsito() {
+        return esito;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String s){
+        descrizione=s;
     }
 
     public boolean convalidateshift(){
@@ -37,14 +59,15 @@ public class Prestazione {
         return validturn;
     }
 
-    public Prestazione(String t, LocalDate d, String de, Ricovero r, Medico m, TurnoLavorativo tl){
+    public Prestazione(String t, LocalDate d, String s, String de, Ricovero r, Medico m, TurnoLavorativo tl){
         tipo=t;
         data=d;
-        stato="Non completato";
-        esito="Sconosciuto";
+        idwork=s;
         descrizione=de;
         ricoveroassegnato=r;
         medicoassegnato=m;
         turno=tl;
+        esito="Esito Mancante";
+        stato="Sconosciuto";
     }
 }

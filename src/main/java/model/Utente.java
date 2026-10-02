@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 
 public class Utente {
     protected String username;
@@ -8,10 +7,12 @@ public class Utente {
 
     
     public boolean login(String usn, String pw){
-        return(usn==username&&pw==password);
+        return(usn.equals(username)&&pw.equals(password));
     }
 
-    public void logout(){}
+    public void logout(){
+        //Metodo possibilmente da scartare
+    }
 
     public Utente(String usn, String pw){
         password=pw;

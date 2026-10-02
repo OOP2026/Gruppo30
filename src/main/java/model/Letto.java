@@ -2,57 +2,38 @@ package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Letto {
-    private String code;
+    private final String code;
     Stanza s;
     ArrayList<Ricovero> ricoveriAssegnati;
 
     public Letto(String c, Stanza s){
         code=c;
         this.s=s;
-        ricoveriAssegnati=new ArrayList<>();
     }
 
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 
     public boolean isAvailable(LocalDate d1, LocalDate d2){
-        boolean availability=true;
-        for(int i=0; i<ricoveriAssegnati.size();i++){
-            if(d1.isBefore(ricoveriAssegnati.get(i).getStart()) && d2.isBefore(ricoveriAssegnati.get(i).getStart())) {
-                if (d1.isAfter(ricoveriAssegnati.get(i).getEnd()) && d2.isAfter(ricoveriAssegnati.get(i).getEnd())){
-                    //Codice vuoto in quanto non necessario eseguire operazioni in caso la condizione e' vera.
-                }
-                else {
-                    availability = false;
-                    break;
-                }
-            }
-            else{
-                availability=false;
-                break;
-            }
-        }
-        return availability;
-    }
-    public boolean isAvailableToday() {
-        LocalDate d=LocalDate.now();
-        boolean availability = true;
-        for (int i = 0; i < ricoveriAssegnati.size(); i++) {
-            if (d.isAfter(ricoveriAssegnati.get(i).getStart()) && d.isBefore(ricoveriAssegnati.get(i).getEnd()))
-                availability = false;
+        boolean availability=false;
+        for(Ricovero ricovero : ricoveriAssegnati){
+            if(d1.isBefore(ricovero.getStart()) && d2.isBefore(ricovero.getStart()))
+                availability=true;
+            else if(d1.isAfter(ricovero.getEnd()) && d2.isAfter(ricovero.getEnd()))
+                availability=true;
         }
         return availability;
     }
 
-    //Questo metodo necessita la GUI per l'implementazione, quindi rimane un prototipo per ora.
-    public String getSituation(LocalDate date){
-        return null;
+    public void getSituation(LocalDate date){
+        //Questo metodo necessita la GUI per l'implementazione, quindi rimane un prototipo per ora.
     }
 
-    public ArrayList<Ricovero> getRicoveriAssegnati(){
+    public List<Ricovero> getRicoveriAssegnati(){
         return ricoveriAssegnati;
     }
 }

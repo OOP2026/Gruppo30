@@ -3,15 +3,17 @@ package model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ricovero {
     private LocalDate start;
     private LocalDate end;
+    private String codicep;
+    private String codiceb;
     private String idrec;
-    private ArrayList<Prestazione> prestazioniassegnate;
+    private ArrayList<Prestazione> prestazioniassegnate=null;
     Letto lettoassegnato;
-    Paziente pazienteassegnato;
-
+    // Non ho trovato necessario implementare l'associazione tra paziente e ricovero, in quanto sarebbe inutile ai fini del programma.
 
 
     public void calculatetime(){
@@ -39,26 +41,24 @@ public class Ricovero {
         end=newe;
     }
 
-    public Paziente getpazienteassegnato(){return pazienteassegnato;}
-
-    public ArrayList<Prestazione> getPrestazioniassegnate(){
+    public List<Prestazione> getPrestazioniassegnate(){
         return prestazioniassegnate;
     }
 
     public boolean isoverlapped(Ricovero compared, String bedcode){
         boolean overlapstate=false;
-        if(bedcode.equals(lettoassegnato.getCode())&&start.isAfter(compared.getStart())&&start.isBefore(compared.getEnd()))
+        if(bedcode.equals(codiceb)&&start.isAfter(compared.getStart())&&start.isBefore(compared.getEnd()))
                 overlapstate=true;
 
         return overlapstate;
     }
 
-    public Ricovero(LocalDate s, LocalDate e, Letto l, Paziente p, String idr){
+    public Ricovero(LocalDate s, LocalDate e, String cb, String cp, String idr, Letto l){
         start=s;
         end=e;
+        codiceb=cb;
+        codicep=cp;
         idrec=idr;
         lettoassegnato=l;
-        pazienteassegnato=p;
-        prestazioniassegnate = new ArrayList<>();
     }
 }

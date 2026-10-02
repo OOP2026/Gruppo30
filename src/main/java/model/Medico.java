@@ -1,35 +1,37 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Medico extends Utente{
-    private String matricola;
+    private final String matricola;
     private String specializzazione;
     private ArrayList<Prestazione> prestazioni;
     Reparto r;
     ArrayList<TurnoLavorativo> turniassegnati;
 
+    public String getMatricola() {
+        return matricola;
+    }
 
     public ArrayList<Prestazione> viewagenda(LocalDate date){
         ArrayList<Prestazione> listp=new ArrayList<>();
 
-        for(int i=0; i<prestazioni.size();i++){
-            if(prestazioni.get(i).getData()==date)
-                listp.add(prestazioni.get(i));
+        for(Prestazione prestazione : prestazioni){
+            if(prestazione.getData().isEqual(date))
+                listp.add(prestazione);
         }
         return listp;
     }
-    public void registraPrestazione(String t, LocalDate d, String de, Ricovero r, TurnoLavorativo tl){
-        Prestazione work=new Prestazione(t, d, de, r, this, tl);
+    public void registeroperation(String t, LocalDate d, String s, String de, Ricovero r, TurnoLavorativo tl){
+        Prestazione work=new Prestazione(t, d, s, de, r, this, tl);
         r.getPrestazioniassegnate().add(work);
         this.prestazioni.add(work);
     }
-    public void completaPrestazione(String idp, String text){
-        for(int i=0; i<prestazioni.size();i++){
-            if(idp==prestazioni.get(i).getIdwork())
-                prestazioni.get(i).setEsito(text);
+    public void completeoperation(String idp, String text){
+        for(Prestazione prestazione : prestazioni){
+            if(idp.equals(prestazione.getIdwork()))
+                prestazione.setEsito(text);
         }
     }
 
@@ -37,21 +39,13 @@ public class Medico extends Utente{
         return prestazioni;
     }
 
-    public ArrayList<TurnoLavorativo> getTurni(){
-        return turniassegnati;
-    }
-
-    public void aggiungiTurno(LocalDate date, LocalTime i, LocalTime f){
-        TurnoLavorativo turno=new TurnoLavorativo(date, i, f, this);
-        turniassegnati.add(turno);
-    }
 
     public Medico(String usn, String pw, String m, String s, Reparto r){
         super(usn,pw);
         matricola=m;
         specializzazione=s;
         this.r=r;
-        prestazioni=new ArrayList<Prestazione>();
-        turniassegnati=new ArrayList<TurnoLavorativo>();
+        prestazioni=new ArrayList<>();
+        turniassegnati=new ArrayList<>();
     }
 }
