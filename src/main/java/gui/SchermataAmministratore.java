@@ -10,13 +10,13 @@ public class SchermataAmministratore {
     private JButton gestioneRicoveriButton;
     private JButton ricercaDimissioniButton;
     private JButton statoLettiButton;
-    private JPanel PanelAdmin;
+    private JPanel panelAdmin;
     JFrame frame;
 
 
     public SchermataAmministratore(JFrame frameC, Controller controller) {
         frame= new JFrame("Area Amministratore");
-        frame.setContentPane(getPanelAdmin());
+        frame.setContentPane(panelAdmin);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(frameC);
@@ -26,7 +26,7 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Gestione Pazienti");
-                GestionePazienti gestionePazienti=new GestionePazienti(frame, controller);
+                GestionePazienti gestionepazienti=new GestionePazienti(frame, controller);
                 frame.setVisible(false);
             }
         });
@@ -35,8 +35,7 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Gestione Ricoveri");
-                GestioneRicoveri gestioneRicoveri= new GestioneRicoveri(frame, controller);
-                frame.setVisible(false);
+                //controller
             }
         });
 
@@ -44,9 +43,7 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Ricerca Dimissioni");
-                RicercaDimissioni ricercaDimissioni= new RicercaDimissioni(frame, controller);
-                frame.setVisible(false);
-
+                //controller
             }
         });
 
@@ -54,13 +51,12 @@ public class SchermataAmministratore {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Log: Richiesta apertura Stato Letti");
-                StatoLetti statoLetti= new StatoLetti(frame, controller);
-                frame.setVisible(false);
+                //controller
             }
         });
     }
 
     public JPanel getPanelAdmin() {
-        return PanelAdmin;
+        return panelAdmin;
     }
 }

@@ -14,13 +14,12 @@ public class Login {
     private JLabel username;
     private JLabel password;
     private static JFrame frame;
-    private final Controller controller;
+    private final Controller controller=new Controller();
 
     private JCheckBox chkAdmin;
     private JCheckBox chkMedico;
 
     public Login() {
-        controller= new Controller();
         accediButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
