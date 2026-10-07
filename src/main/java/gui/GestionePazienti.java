@@ -1,18 +1,16 @@
 package gui;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import controller.Controller;
+import javax.swing.*;
 
 public class GestionePazienti {
     private JPanel panelPazienti;
     private JButton annullaButton;
     private JButton confermaButton;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+    private JTextField nomeText;
+    private JTextField cognomeText;
+    private JTextField cfText;
+    private JTextField dateText;
     private JTable tabellaPazienti;
     private JLabel campoNome;
     private JLabel campoCognome;
@@ -24,42 +22,79 @@ public class GestionePazienti {
     public GestionePazienti(JFrame framec, Controller controller) {
         frame = new JFrame("Gestione Pazienti");
         frame.setContentPane(panelPazienti);
-        frame.setLocationRelativeTo(framec);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
-
-        confermaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Controller
-            }
-        });
-
-        annullaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Controller
-            }
-        });
+        frame.setLocationRelativeTo(framec);
     }
 
-    public JPanel getPanelPazienti() {
-        return panelPazienti;
+    public String getNome() {
+        if(nomeText != null){
+            return nomeText.getText().trim();
+        }
+        else {
+            return "";
+        }
     }
 
-    public String getNome() { return textField1.getText(); }
-    public String getCognome() { return textField2.getText(); }
-    public String getCodiceFiscale() { return textField3.getText(); }
-    public String getDataNascita() { return textField4.getText(); }
+    public String getCognome() {
+        if(cognomeText != null){
+            return cognomeText.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
+
+    public String getCodiceFiscale() {
+        if(cfText != null){
+           return cfText.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
+
+    public String getDataNascita() {
+        if(dateText != null){
+            return dateText.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
 
     public void svuotaCampi() {
-        textField1.setText("");
-        textField2.setText("");
-        textField3.setText("");
-        textField4.setText("");
+        if (nomeText != null) nomeText.setText("");
+        if (cognomeText != null) cognomeText.setText("");
+        if (cfText != null) cfText.setText("");
+        if (dateText != null) dateText.setText("");
+    }
+
+    public JButton getConfermaButton() {
+        return confermaButton;
+    }
+
+    public JButton getAnnullaButton() {
+        return annullaButton;
     }
 
     public JTable getTabellaPazienti() {
         return tabellaPazienti;
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void mostraMessaggio(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Informazione", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void mostraErrore(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void visualizza(boolean visibile) {
+        frame.setVisible(visibile);
     }
 }

@@ -1,62 +1,54 @@
 package gui;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import controller.Controller;
+import javax.swing.*;
 
 public class SchermataAmministratore {
+    private JFrame frame;
+    private JPanel panelAdmin;
     private JButton gestionePazientiButton;
     private JButton gestioneRicoveriButton;
     private JButton ricercaDimissioniButton;
     private JButton statoLettiButton;
-    private JPanel panelAdmin;
-    JFrame frame;
+    private JLabel adminSchermataText;
 
-
-    public SchermataAmministratore(JFrame frameC, Controller controller) {
-        frame= new JFrame("Area Amministratore");
+    public SchermataAmministratore(JFrame parentFrame, Controller controller) {
+        frame = new JFrame("Area Amministratore");
         frame.setContentPane(panelAdmin);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setLocationRelativeTo(frameC);
-        frame.setVisible(true);
-
-        gestionePazientiButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Log: Richiesta apertura Gestione Pazienti");
-                GestionePazienti gestionepazienti=new GestionePazienti(frame, controller);
-                frame.setVisible(false);
-            }
-        });
-
-        gestioneRicoveriButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Log: Richiesta apertura Gestione Ricoveri");
-                //controller
-            }
-        });
-
-        ricercaDimissioniButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Log: Richiesta apertura Ricerca Dimissioni");
-                //controller
-            }
-        });
-
-        statoLettiButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Log: Richiesta apertura Stato Letti");
-                //controller
-            }
-        });
+        frame.setLocationRelativeTo(parentFrame);
     }
 
-    public JPanel getPanelAdmin() {
-        return panelAdmin;
+    public JButton getGestionePazientiButton() {
+        return gestionePazientiButton;
+    }
+
+    public JButton getGestioneRicoveriButton() {
+        return gestioneRicoveriButton;
+    }
+
+    public JButton getRicercaDimissioniButton() {
+        return ricercaDimissioniButton;
+    }
+
+    public JButton getStatoLettiButton() {
+        return statoLettiButton;
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void mostraMessaggio(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Informazione", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void mostraErrore(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void visualizza(boolean visibile) {
+        frame.setVisible(visibile);
     }
 }

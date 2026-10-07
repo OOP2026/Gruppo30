@@ -1,10 +1,10 @@
 package gui;
 
+import controller.Controller;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GestioneRicoveri {
+    private JFrame frame;
     private JPanel panelRicoveri;
     private JTextField campoCFPaziente;
     private JTextField campoCodiceLetto;
@@ -14,36 +14,94 @@ public class GestioneRicoveri {
     private JButton confermaButton;
     private JTable tabellaRicoveri;
 
-    public GestioneRicoveri() {
-        confermaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Controller
-            }
-        });
+    public GestioneRicoveri(JFrame framec, Controller controller) {
+        frame = new JFrame("Gestione Ricoveri");
+        frame.setContentPane(panelRicoveri);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(framec);
+    }
 
-        annullaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Controller
-            }
-        });
+    public String getCFPaziente() {
+        if ((campoCFPaziente != null)) {
+            return campoCFPaziente.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
+
+    public String getCodiceLetto() {
+        if(campoCodiceLetto != null){
+            return campoCodiceLetto.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
+
+    public String getDataInizio() {
+        if(campoDataInizio != null){
+            return campoDataInizio.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
+
+    public String getDataFine() {
+        if(campoDataFine != null){
+            return campoDataFine.getText().trim();
+        }
+        else{
+            return "";
+        }
+    }
+
+    public void svuotaCampi() {
+        if (campoCFPaziente != null) {
+            campoCFPaziente.setText("");
+        }
+        if (campoCodiceLetto != null) {
+            campoCodiceLetto.setText("");
+        }
+        if (campoDataInizio != null) {
+            campoDataInizio.setText("");
+        }
+        if (campoDataFine != null) {
+            campoDataFine.setText("");
+        }
+    }
+
+    public JButton getConfermaButton() {
+        return confermaButton;
+    }
+
+    public JButton getAnnullaButton() {
+        return annullaButton;
+    }
+
+    public JTable getTabellaRicoveri() {
+        return tabellaRicoveri;
     }
 
     public JPanel getPanelRicoveri() {
         return panelRicoveri;
     }
-    public String getCFPaziente() { return campoCFPaziente.getText(); }
-    public String getCodiceLetto() { return campoCodiceLetto.getText(); }
-    public String getDataInizio() { return campoDataInizio.getText(); }
-    public String getDataFine() { return campoDataFine.getText(); }
 
-    public JTable getTabellaRicoveri() { return tabellaRicoveri; }
+    public JFrame getFrame() {
+        return frame;
+    }
 
-    public void svuotaCampi() {
-        campoCFPaziente.setText("");
-        campoCodiceLetto.setText("");
-        campoDataInizio.setText("");
-        campoDataFine.setText("");
+    public void mostraMessaggio(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Informazione", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void mostraErrore(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void visualizza(boolean visibile) {
+        frame.setVisible(visibile);
     }
 }

@@ -1,52 +1,86 @@
 package gui;
 
+import controller.Controller;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class RegistraPrestazione {
+    private JFrame frame;
     private JPanel panelRegistraPrestazione;
-    private JTextArea campoTipo; // Usata per il risultato/note
+    private JTextArea campoNote;
     private JButton salvaButton;
     private JButton annullaButton;
-    private JTextField campoData; // Rinominata correttamente!
-    private JTextField textField2; // Usata per il tipo di prestazione
+    private JTextField campoData;
+    private JTextField tipoPrestazione;
+    private JLabel dataPrestazioneText;
+    private JLabel tipoPrestazioneText;
+    private JLabel labelPrestazioni;
+    private JLabel noteLabel;
 
-        public RegistraPrestazione() {
-            salvaButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //Controller
-                }
-            });
+    public RegistraPrestazione(JFrame parentFrame, Controller controller) {
+        frame = new JFrame("Registra Prestazione Medica");
+        frame.setContentPane(panelRegistraPrestazione);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(parentFrame);
+    }
 
-            annullaButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //Controller
-                }
-            });
-        }
-
-        public JPanel getPanelRegistraPrestazione() {
-            return panelRegistraPrestazione;
-        }
-
-        public String getData() {
-            return campoData.getText();
-        }
-
-        public String getTipoPrestazione() {
-            return textField2.getText();
-        }
-
-        public String getRisultato() {
-            return campoTipo.getText();
-        }
-
-        public void svuotaCampi() {
-            campoData.setText("");
-            textField2.setText("");
-            campoTipo.setText("");
+    public String getData() {
+        if (campoData != null) {
+            return campoData.getText().trim();
+        } else {
+            return "";
         }
     }
+
+    public String getTipoPrestazione() {
+        if (tipoPrestazione != null) {
+            return tipoPrestazione.getText().trim();
+        } else {
+            return "";
+        }
+    }
+
+    public String getNote() {
+        if (campoNote != null) {
+            return campoNote.getText().trim();
+        } else {
+            return "";
+        }
+    }
+
+    public void svuotaCampi() {
+        if (campoData != null) {
+            campoData.setText("");
+        }
+        if (tipoPrestazione != null) {
+            tipoPrestazione.setText("");
+        }
+        if (campoNote != null) {
+            campoNote.setText("");
+        }
+    }
+
+    public JButton getSalvaButton() {
+        return salvaButton;
+    }
+
+    public JButton getAnnullaButton() {
+        return annullaButton;
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void mostraMessaggio(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Informazione", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void mostraErrore(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void visualizza(boolean visibile) {
+        frame.setVisible(visibile);
+    }
+}

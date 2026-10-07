@@ -2,62 +2,61 @@ package model;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
-
+import java.util.List;
 
 public class Amministratore extends Utente {
-    public void inserisciPaziente(String c, String n, String s, LocalDate d, ArrayList<Paziente> list){
-        Paziente patient=new Paziente(c, n, s, d);
-        list.add(patient);
-    }
-
-    public void modificaPaziente(String c, String n, String s, LocalDate d, ArrayList<Paziente> list){
-
-        for (Paziente paziente : list) {
-            if (c.equals(paziente.getCodiceFiscale())) {
-                paziente.setNome(n);
-                paziente.setCognome(s);
-                paziente.setDataNascita(d);
-            }
-        }
-    }
-
-//Questo metodo inizializza un ricovero e lo assegna ad un letto.
-
-    public void inserisciRicovero(LocalDate s, LocalDate e, String cb, String cp, String idr, Letto l){
-        Ricovero ricovery=new Ricovero(s, e, cb, cp, idr, l);
-        l.getRicoveriAssegnati().add(ricovery);
-
-    }
-
-    public void modificaRicovero(String idr, LocalDate ns, LocalDate ne, ArrayList<Ricovero> listr){
-        for (Ricovero ricovero : listr) {
-            if (idr.equals(ricovero.getIdrec())) {
-                ricovero.setStart(ns);
-                ricovero.setEnd(ne);
-            }
-        }
-    }
-
-    public ArrayList<Ricovero> getPazientiInScadenza(LocalDate date, ArrayList<Ricovero> listr){
-        ArrayList<Ricovero> nlistr= new ArrayList<>();
-        for(Ricovero ricovero : listr){
-            if(ricovero.getEnd()==date)
-                nlistr.add(ricovero);
-        }
-
-        return nlistr;
-    }
-
-    public ArrayList<Letto> cercaLettiDisponibili(ArrayList<Stanza> lists){
-        ArrayList<Letto> listl=new ArrayList<>();
-        LocalDate d1=LocalDate.of(2026,5,2);
-        LocalDate d2=LocalDate.of(2026,5,2);
-        for(Stanza stanza : lists){
-            listl.addAll(stanza.listaDisponibili(d1,d2));
-        }
-        return listl;
-    }
-    public Amministratore(String usn, String pw){
+    public Amministratore(String usn, String pw) {
         super(usn, pw);
+    }
+
+    public void inserisciPaziente(String cf, String nome, String cognome, LocalDate dataNascita, List<Paziente> listaPazienti) {
+        Paziente patient = new Paziente(cf, nome, cognome, dataNascita);
+        listaPazienti.add(patient);
+    }
+
+    public boolean modificaPaziente(String cf, String nome, String cognome, LocalDate dataNascita, List<Paziente> listaPazienti) {
+        for (Paziente paziente : listaPazienti) {
+            if (cf.equalsIgnoreCase(paziente.getCodiceFiscale())) {
+                paziente.setNome(nome);
+                paziente.setCognome(cognome);
+                paziente.setDataNascita(dataNascita);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void inserisciRicovero(LocalDate inizio, LocalDate fine, String codBed, String codPaziente, String idRicovero, Letto letto) {
+        Ricovero ricovero = new Ricovero(inizio, fine, codBed, codPaziente, idRicovero, letto);
+        letto.getRicoveriAssegnati().add(ricovero);
+    }
+
+    public boolean modificaRicovero(String idRicovero, LocalDate nuovoInizio, LocalDate nuovaFine, List<Ricovero> listaRicoveri) {
+        for (Ricovero ricovero : listaRicoveri) {
+            if (idRicovero.equals(ricovero.getIdrec())) {
+                ricovero.setStart(nuovoInizio);
+                ricovero.setEnd(nuovaFine);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Ricovero> getPazientiInScadenza(LocalDate dataScadenza, List<Ricovero> listaRicoveri) {
+        List<Ricovero> scaduti = new ArrayList<>();
+        for (Ricovero ricovero : listaRicoveri) {
+            if (ricovero.getEnd().equals(dataScadenza)) {
+                scaduti.add(ricovero);
+            }
+        }
+        return scaduti;
+    }
+
+    public List<Letto> cercaLettiDisponibili(LocalDate inizio, LocalDate fine, List<Stanza> listaStanze) {
+        List<Letto> lettiDisponibili = new ArrayList<>();
+        for (Stanza stanza : listaStanze) {
+            lettiDisponibili.addAll(stanza.listaDisponibili(inizio, fine));
+        }
+        return lettiDisponibili;
     }
 }

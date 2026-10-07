@@ -130,7 +130,7 @@
           <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <component id="27b16" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="27b16" class="javax.swing.JTextField" binding="nomeText">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -138,7 +138,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="b518d" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="b518d" class="javax.swing.JTextField" binding="cognomeText">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -146,7 +146,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="27df2" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="27df2" class="javax.swing.JTextField" binding="cfText">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -154,7 +154,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="8d10" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="8d10" class="javax.swing.JTextField" binding="dateText">
         <constraints>
           <grid row="9" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

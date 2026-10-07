@@ -1,41 +1,74 @@
 package gui;
 
+import controller.Controller;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StatoLetti {
+    private JFrame frame;
     private JPanel panelStatoLetti;
     private JButton cercaBtn;
     private JTable tabellaLetti;
-    private JComboBox comboReparti;
+    private JComboBox<String> comboReparti;
     private JButton btnIndietro;
 
-    public StatoLetti() {
-        cercaBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Controller
-            }
-        });
+    public StatoLetti(JFrame parentFrame, Controller controller) {
+        frame = new JFrame("Monitoraggio Stato Letti");
+        frame.setContentPane(panelStatoLetti);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(parentFrame);
+    }
 
-        btnIndietro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Controller
-            }
-        });
+    public String getRepartoSelezionato() {
+        if (comboReparti != null && comboReparti.getSelectedItem() != null) {
+            return comboReparti.getSelectedItem().toString().trim();
+        }
+        else {
+            return "";
+        }
+    }
+
+    public JComboBox<String> getComboReparti() {
+        return comboReparti;
+    }
+    
+    public JButton getCercaBtn() {
+        return cercaBtn;
+    }
+
+    public JButton getBtnIndietro() {
+        return btnIndietro;
+    }
+
+    public JTable getTabellaLetti() {
+        return tabellaLetti;
     }
 
     public JPanel getPanelStatoLetti() {
         return panelStatoLetti;
     }
 
-    public JComboBox getComboReparti() {
-        return comboReparti;
+    public JFrame getFrame() {
+        return frame;
     }
 
-    public JTable getTabellaLetti() {
-        return tabellaLetti;
+    public void mostraMessaggio(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Informazione", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public void mostraErrore(String messaggio) {
+        JOptionPane.showMessageDialog(frame, messaggio, "Errore", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void visualizza(boolean visibile) {
+        frame.setVisible(visibile);
+    }
+    public void popolaReparti(java.util.List<String> reparti) {
+        if (comboReparti != null) {
+            comboReparti.removeAllItems();
+            for (String rep : reparti) {
+                comboReparti.addItem(rep);
+            }
+        }
     }
 }

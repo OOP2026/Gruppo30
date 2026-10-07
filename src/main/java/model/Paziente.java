@@ -7,7 +7,7 @@ public class Paziente {
     private String nome;
     private String cognome;
     private LocalDate dataNascita;
-    // Non ho trovato necessario implementare l'associazione tra paziente e ricovero, in quanto sarebbe inutile ai fini del programma.
+    private boolean ricoverato = false;
 
     public String getCodiceFiscale() {
         return codiceFiscale;
