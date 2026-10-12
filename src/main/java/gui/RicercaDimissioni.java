@@ -11,6 +11,7 @@ public class RicercaDimissioni {
     private JButton btnIndietro;
     private JTextField dataRicerca;
     private JLabel campoDataRicerca;
+    private JButton btnOggi;
 
     public RicercaDimissioni(JFrame parentFrame, Controller controller) {
         frame = new JFrame("Ricerca Pazienti in Dimissione");
@@ -20,6 +21,12 @@ public class RicercaDimissioni {
         frame.setLocationRelativeTo(parentFrame);
     }
 
+    public void setDataRicerca(String data) {
+        if (dataRicerca != null) {
+            dataRicerca.setText(data);
+        }
+    }
+
     public String getDataRicerca() {
         if(dataRicerca != null){
            return dataRicerca.getText().trim();
@@ -27,6 +34,10 @@ public class RicercaDimissioni {
         else{
             return "";
         }
+    }
+
+    public JButton getBtnOggi() {
+        return btnOggi;
     }
 
     public void svuotaCampi() {

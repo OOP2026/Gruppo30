@@ -1,30 +1,37 @@
 package model;
 
-
-public class Utente {
+public abstract class Utente {
     protected String username;
     protected String password;
     protected boolean loggato = false;
 
-    
-    public boolean login(String usn, String pw){
-        return(usn.equals(username)&&pw.equals(password));
+    public Utente(String usn, String pw) {
+        this.username = usn;
+        this.password = pw;
     }
-    public void logout(){
+
+    public boolean login(String usn, String pw) {
+        if (usn.equals(this.username) && pw.equals(this.password)) {
+            this.loggato = true;
+            return true;
+        }
+        return false;
+    }
+
+    public void logout() {
         this.loggato = false;
     }
-    public boolean isLoggato(){
+
+    public boolean isLoggato() {
         return this.loggato;
     }
-    public void login(){
-        // da aggiornare
-    }
-    public Utente(String usn, String pw){
-        password=pw;
-        username=usn;
-    }
-    public String ritornaUser(){
+
+    public String getUsername() {
         return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
     }
 }
 

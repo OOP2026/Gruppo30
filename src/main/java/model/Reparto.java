@@ -26,8 +26,8 @@ public class Reparto {
         stanze.add(newstanza);
     }
 
-    public void addMedico(String u, String p, String m, String s){
-        Medico newmedic=new Medico(u, p, m, s, this);
+    public void addMedico(String u, String p, String m){
+        Medico newmedic=new Medico(u, p, m, this);
         this.impiegati.add(newmedic);
     }
 

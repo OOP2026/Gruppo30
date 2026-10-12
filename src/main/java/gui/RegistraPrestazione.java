@@ -1,7 +1,9 @@
 package gui;
 
 import controller.Controller;
+
 import javax.swing.*;
+import java.time.LocalTime;
 
 public class RegistraPrestazione {
     private JFrame frame;
@@ -15,6 +17,10 @@ public class RegistraPrestazione {
     private JLabel tipoPrestazioneText;
     private JLabel labelPrestazioni;
     private JLabel noteLabel;
+    private JTextField oraFineField;
+    private JTextField oraInizioField;
+    private JLabel oraInizioLabel;
+    private JLabel oraFineLabel;
 
     public RegistraPrestazione(JFrame parentFrame, Controller controller) {
         frame = new JFrame("Registra Prestazione Medica");
@@ -57,6 +63,21 @@ public class RegistraPrestazione {
         }
         if (campoNote != null) {
             campoNote.setText("");
+        }
+    }
+    public String getOraInizio() {
+        if (oraInizioField != null) {
+            return oraInizioField.getText().trim();
+        } else {
+            return "";
+        }
+    }
+
+    public String getOraFine() {
+        if (oraFineField != null) {
+            return oraFineField.getText().trim();
+        } else {
+            return "";
         }
     }
 

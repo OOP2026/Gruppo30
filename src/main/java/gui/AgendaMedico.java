@@ -14,13 +14,32 @@ public class AgendaMedico {
     private JLabel campoDataAgenda;
     private JLabel agendaLabel;
     private JButton btnModificaEsito;
+    private JComboBox<String> comboTipoAgenda;
 
     public AgendaMedico(JFrame parentFrame, Controller controller) {
         frame = new JFrame("Sistema Ospedaliero - Agenda Medico");
         frame.setContentPane(panelAgenda);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        if (comboTipoAgenda != null) {
+            comboTipoAgenda.removeAllItems();
+            comboTipoAgenda.addItem("Giornaliera");
+            comboTipoAgenda.addItem("Settimanale");
+        }
+
         frame.pack();
         frame.setLocationRelativeTo(parentFrame);
+    }
+    public String getTipoAgendaSelezionata() {
+        if (comboTipoAgenda != null && comboTipoAgenda.getSelectedItem() != null) {
+            return comboTipoAgenda.getSelectedItem().toString().trim();
+        } else {
+            return "Giornaliera";
+        }
+    }
+
+    public JComboBox<String> getComboTipoAgenda() {
+        return comboTipoAgenda;
     }
 
     public String getDataSelezionata() {
@@ -28,6 +47,12 @@ public class AgendaMedico {
             return agendaText.getText().trim();
         } else {
             return "";
+        }
+    }
+
+    public void setDataSelezionata(String data) {
+        if (agendaText != null) {
+            agendaText.setText(data);
         }
     }
 

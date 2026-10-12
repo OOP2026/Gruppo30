@@ -1,10 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Prestazione {
     private final String tipo;
     private final LocalDate data;
+    private final LocalTime oraInizio;
+    private final LocalTime oraFine;
     private String esito;
     private String stato;
     private String descrizione;
@@ -13,61 +16,85 @@ public class Prestazione {
     Medico medicoassegnato;
     TurnoLavorativo turno;
 
-    public String getTipo() {
-        return tipo;
+    public Prestazione(String t, LocalDate d, LocalTime oraInizio, LocalTime oraFine,
+                       String s, String de, Ricovero r, Medico m, TurnoLavorativo tl) {
+        this.tipo = t;
+        this.data = d;
+        this.oraInizio = oraInizio;
+        this.oraFine = oraFine;
+        this.idwork = s;
+        this.descrizione = de;
+        this.ricoveroassegnato = r;
+        this.medicoassegnato = m;
+        this.turno = tl;
+        this.esito = "Esito Mancante";
+        this.stato = "Sconosciuto";
     }
 
-    public String getStato() {
-        return stato;
-    }
-
-    public void setStato(String s){
-        stato=s;
-    }
-    public LocalDate getData(){
+    public LocalDate getData() {
         return data;
     }
 
-    public String getIdwork(){
+    public LocalTime getOraInizio() {
+        return oraInizio;
+    }
+
+    public LocalTime getOraFine() {
+        return oraFine;
+    }
+
+    public String getIdwork() {
         return idwork;
     }
 
-    public void setEsito(String s){
-        esito=s;
+    public String getTipo() {
+        return tipo;
     }
 
     public String getEsito() {
         return esito;
     }
 
+    public void setEsito(String s) {
+        this.esito = s;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String s) {
+        this.stato = s;
+    }
+
     public String getDescrizione() {
         return descrizione;
     }
 
-    public void setDescrizione(String s){
-        descrizione=s;
+    public void setDescrizione(String s) {
+        this.descrizione = s;
     }
 
-    public boolean convalidateshift(){
-        boolean validturn=false;
+    public boolean convalidateshift() {
+        if (this.turno == null || this.data == null || this.oraInizio == null || this.oraFine == null) {
+            return false;
+        }
+        if (!this.turno.getData().equals(this.data)) {
+            return false;
+        }
+        if (!this.oraInizio.isBefore(this.oraFine)) {
+            return false;
+        }
 
-        if(this.turno.getData()==this.data)
-            validturn=true;
-        else
-            System.out.println("Turno non valido, assegnare un turno diverso a questa prestazione o cambia la data della prestazione.");
+        boolean iniziaNelTurno = !this.oraInizio.isBefore(this.turno.getInizio());
+        boolean finisceNelTurno = !this.oraFine.isAfter(this.turno.getFine());
 
-        return validturn;
+        return iniziaNelTurno && finisceNelTurno;
     }
-
-    public Prestazione(String t, LocalDate d, String s, String de, Ricovero r, Medico m, TurnoLavorativo tl){
-        tipo=t;
-        data=d;
-        idwork=s;
-        descrizione=de;
-        ricoveroassegnato=r;
-        medicoassegnato=m;
-        turno=tl;
-        esito="Esito Mancante";
-        stato="Sconosciuto";
+    public boolean siSovrappone(Prestazione altra) {
+        if (altra == null || !this.data.equals(altra.getData())) {
+            return false;
+        }
+        return this.oraInizio.isBefore(altra.getOraFine()) && this.oraFine.isAfter(altra.getOraInizio());
     }
 }

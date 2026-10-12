@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Amministratore extends Utente {
@@ -26,12 +27,12 @@ public class Amministratore extends Utente {
         return false;
     }
 
-    public void inserisciRicovero(LocalDate inizio, LocalDate fine, String codBed, String codPaziente, String idRicovero, Letto letto) {
+    public void inserisciRicovero(LocalDateTime inizio, LocalDateTime fine, String codBed, String codPaziente, String idRicovero, Letto letto) {
         Ricovero ricovero = new Ricovero(inizio, fine, codBed, codPaziente, idRicovero, letto);
         letto.getRicoveriAssegnati().add(ricovero);
     }
 
-    public boolean modificaRicovero(String idRicovero, LocalDate nuovoInizio, LocalDate nuovaFine, List<Ricovero> listaRicoveri) {
+    public boolean modificaRicovero(String idRicovero, LocalDateTime nuovoInizio, LocalDateTime nuovaFine, List<Ricovero> listaRicoveri) {
         for (Ricovero ricovero : listaRicoveri) {
             if (idRicovero.equals(ricovero.getIdrec())) {
                 ricovero.setStart(nuovoInizio);
@@ -45,14 +46,14 @@ public class Amministratore extends Utente {
     public List<Ricovero> getPazientiInScadenza(LocalDate dataScadenza, List<Ricovero> listaRicoveri) {
         List<Ricovero> scaduti = new ArrayList<>();
         for (Ricovero ricovero : listaRicoveri) {
-            if (ricovero.getEnd().equals(dataScadenza)) {
+            if (ricovero.getEnd() != null && ricovero.getEnd().toLocalDate().equals(dataScadenza)) {
                 scaduti.add(ricovero);
             }
         }
         return scaduti;
     }
 
-    public List<Letto> cercaLettiDisponibili(LocalDate inizio, LocalDate fine, List<Stanza> listaStanze) {
+    public List<Letto> cercaLettiDisponibili(LocalDateTime inizio, LocalDateTime fine, List<Stanza> listaStanze) {
         List<Letto> lettiDisponibili = new ArrayList<>();
         for (Stanza stanza : listaStanze) {
             lettiDisponibili.addAll(stanza.listaDisponibili(inizio, fine));

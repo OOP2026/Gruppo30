@@ -15,9 +15,18 @@ public class TurnoLavorativo {
         return data;
     }
 
+    public LocalTime getInizio() {
+        return inizio;
+    }
+
+    public LocalTime getFine() {
+        return fine;
+    }
+
     public TurnoLavorativo(LocalDate d, LocalTime i, LocalTime f){
-        data=d;
-        inizio=i;
-        fine=f;
+        this.data = d;
+        this.inizio = i;
+        this.fine = f;
+        this.prestazioniditurno = new ArrayList<>();
     }
 }

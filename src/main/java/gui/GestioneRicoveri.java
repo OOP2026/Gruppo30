@@ -9,10 +9,16 @@ public class GestioneRicoveri {
     private JTextField campoCFPaziente;
     private JTextField campoCodiceLetto;
     private JTextField campoDataInizio;
-    private JTextField campoDataFine;
+    private JTextField campoOraFine;
     private JButton annullaButton;
     private JButton confermaButton;
     private JTable tabellaRicoveri;
+    private JTextField campoDataFine;
+    private JTextField campoOraInizio;
+    private JLabel dataInizioLabel;
+    private JLabel dataFineLabel;
+    private JLabel r;
+    private JLabel OraInizioLabel;
 
     public GestioneRicoveri(JFrame framec, Controller controller) {
         frame = new JFrame("Gestione Ricoveri");
@@ -48,10 +54,26 @@ public class GestioneRicoveri {
             return "";
         }
     }
+    public String getOraInizio() {
+        if(campoOraInizio != null){
+            return campoOraInizio.getText().trim();}
+        else {
+            return "";
+        }
+    }
+
+    public String getOraFine() {
+        if (campoOraFine != null){
+            return campoOraFine.getText().trim();
+    }
+    else{
+        return "";
+    }
+    }
 
     public String getDataFine() {
-        if(campoDataFine != null){
-            return campoDataFine.getText().trim();
+        if(campoOraFine != null){
+            return campoOraFine.getText().trim();
         }
         else{
             return "";
@@ -68,8 +90,8 @@ public class GestioneRicoveri {
         if (campoDataInizio != null) {
             campoDataInizio.setText("");
         }
-        if (campoDataFine != null) {
-            campoDataFine.setText("");
+        if (campoOraFine != null) {
+            campoOraFine.setText("");
         }
     }
 

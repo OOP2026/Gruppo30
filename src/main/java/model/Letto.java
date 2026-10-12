@@ -1,6 +1,6 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,25 +12,26 @@ public class Letto {
     public Letto(String c, Stanza s){
         code=c;
         this.s=s;
+        this.ricoveriAssegnati = new ArrayList<>();
     }
 
     public String getCode() {
         return code;
     }
 
-    public boolean isAvailable(LocalDate d1, LocalDate d2){
-        boolean availability=false;
-        for(Ricovero ricovero : ricoveriAssegnati){
-            if(d1.isBefore(ricovero.getStart()) && d2.isBefore(ricovero.getStart()))
-                availability=true;
-            else if(d1.isAfter(ricovero.getEnd()) && d2.isAfter(ricovero.getEnd()))
-                availability=true;
+    public boolean isAvailable(LocalDateTime d1, LocalDateTime d2) {
+        if (ricoveriAssegnati == null || ricoveriAssegnati.isEmpty()) {
+            return true;
         }
-        return availability;
-    }
 
-    public void getSituation(LocalDate date){
-        //Questo metodo necessita la GUI per l'implementazione, quindi rimane un prototipo per ora.
+        for (Ricovero ricovero : ricoveriAssegnati) {
+            boolean terminaPrima = d2.isBefore(ricovero.getStart());
+            boolean iniziaDopo = d1.isAfter(ricovero.getEnd());
+            if (!terminaPrima && !iniziaDopo) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public List<Ricovero> getRicoveriAssegnati(){
